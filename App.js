@@ -1,43 +1,39 @@
 import React, { Component } from 'react';
-import {Container, Header, Content, Form, Item, Input, Label, Button, Text, Title} from 'native-base'
-import Next from './next';
-import Alert from 'react-native'
-
+import { Container, Header, Content, Form, Item, Input,Button,Text } from 'native-base';
 export default class App extends Component {
-  state = {
-    heyman: true
+  constructor(props) {
+
+    super(props);
+
+
+    this.state = {
+
+  Username:'',
+  Password:'',
+    };
   }
+
+  onLogin() {
+    let { Username, Password } = this.state;
+    alert( `${Username}  ${Password}`)
+  }
+
   render() {
+    
     return (
       <Container>
-          <Header>
-            <Title>Hey</Title>
-          </Header>
+        <Header />
         <Content>
           <Form>
-          {this.state.heyman ? (
-            <Content>
-            <Item fixedLabel>
-              <Label>Username</Label>
-              <Input />
+            <Item>
+              <Input placeholder={'Username'} editable={true} onChangeText={(Username)=> this.setState({Username})} value={this.state.Username}/>
             </Item>
-            <Item fixedLabel last>
-              <Label>Password</Label>
-              <Input />
+            <Item last>
+              <Input placeholder={"Password"} editable={true} onChangeText={(Password)=> this.setState({Password})} value={this.state.Password} secureTextEntry= {true}/>
             </Item>
-            
-              <Button full onPress={()=>{
-                this.setState({heyman: false});
-                alert('hello')
-              }}>
-                <Text>Sign in</Text>
-              </Button>
-            </Content>
-            ) : (
-              <Content>
-                <Next /> 
-              </Content>
-          )}
+             <Button full onPress={this.onLogin.bind(this)}>
+            <Text>Click Me! </Text>
+          </Button>
           </Form>
         </Content>
       </Container>
